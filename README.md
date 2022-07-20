@@ -7,6 +7,9 @@ In the Xcode `File` menu, click `Add Packages`.  You'll see a dialog where you c
 
 `https://github.com/UserLeap/analytics-swift-sprig`
 
+<img width="202" alt="image" src="https://user-images.githubusercontent.com/73458232/180099287-de18ce96-0e7b-4587-a0a5-a71ada3b8d72.png">
+<img width="1075" alt="image" src="https://user-images.githubusercontent.com/73458232/180099361-94cdcbec-8f00-4cc2-9e2b-a16cd62dd8e0.png">
+
 You'll then have the option to pin to a version, or specific branch, as well as which project in your workspace to add it to.  Once you've made your selections, click the `Add Package` button.  
 
 ### via Package.swift
@@ -27,7 +30,9 @@ Open your Package.swift file and add the following do your the `dependencies` se
 
 ## Using the Plugin in your App
 
-Open the file where you setup and configure the Analytics-Swift library.  Add this plugin to the list of imports.
+Select your iOS Source from `My Sources` dashboard on segment, and get the value for `Write Key` from `Settings -> API Keys`
+
+Open the file where you setup and configure the Analytics-Swift library.  Add this plugin to the list of imports. Replace the write key value.
 
 ```
 import Segment
@@ -43,8 +48,10 @@ let analytics = Analytics(configuration: Configuration(writeKey: "<YOUR WRITE KE
 analytics.add(plugin: SprigDestination())
 ```
 
-Your events will now begin to flow to Sprig in device mode.
-
+Your events will now begin to flow to Sprig in device mode. 
+When you track an event and receives a survey, the survey will show on the top view controller.
+To record attributes, you can make use of the traits parameter when you call [identify](https://segment.com/docs/connections/sources/catalog/libraries/mobile/swift-ios/#identify) function.
+Download [Basic Example](https://github.com/UserLeap/analytics-swift-sprig/tree/main/Example/BasicExample) app for reference.
 
 ## Support
 

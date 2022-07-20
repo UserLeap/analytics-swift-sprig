@@ -3,11 +3,13 @@ Add Sprig `device-mode` support to your application via this plugin
 
 ## Adding the dependency
 ### via Xcode
-In the Xcode `File` menu, click `Add Packages`.  You'll see a dialog where you can search for Swift packages.  In the search field, enter the URL to this repo.
-
-`https://github.com/UserLeap/analytics-swift-sprig`
+In the Xcode `File` menu, click `Add Packages`.  You'll see a dialog where you can search for Swift packages.
 
 <img width="202" alt="image" src="https://user-images.githubusercontent.com/73458232/180099287-de18ce96-0e7b-4587-a0a5-a71ada3b8d72.png">
+
+In the search field, enter the URL to this repo.
+
+`https://github.com/UserLeap/analytics-swift-sprig`
 
 You'll then have the option to pin to a version, or specific branch, as well as which project in your workspace to add it to.  Once you've made your selections, click the `Add Package` button.  
 

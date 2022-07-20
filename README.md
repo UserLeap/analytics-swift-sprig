@@ -8,9 +8,11 @@ In the Xcode `File` menu, click `Add Packages`.  You'll see a dialog where you c
 `https://github.com/UserLeap/analytics-swift-sprig`
 
 <img width="202" alt="image" src="https://user-images.githubusercontent.com/73458232/180099287-de18ce96-0e7b-4587-a0a5-a71ada3b8d72.png">
-<img width="1075" alt="image" src="https://user-images.githubusercontent.com/73458232/180099361-94cdcbec-8f00-4cc2-9e2b-a16cd62dd8e0.png">
 
 You'll then have the option to pin to a version, or specific branch, as well as which project in your workspace to add it to.  Once you've made your selections, click the `Add Package` button.  
+
+<img width="1075" alt="image" src="https://user-images.githubusercontent.com/73458232/180099361-94cdcbec-8f00-4cc2-9e2b-a16cd62dd8e0.png">
+
 
 ### via Package.swift
 

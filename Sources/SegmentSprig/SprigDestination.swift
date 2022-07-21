@@ -21,17 +21,18 @@ public class SprigDestination: DestinationPlugin {
     public var analytics: Analytics? = nil
     
     private var sprigSettings: SprigSettings?
+    private var isSprigConfigured: Bool = false
     
     public init() {}
         
     public func update(settings: Settings, type: UpdateType) {
-        // Already set up.
-        guard type == .initial else { return }
-        
+        // if sprig has been configured do not configure it again
+        guard isSprigConfigured == false  else { return }
         // Grab the settings from segment
         guard let sprigSettings: SprigSettings = settings.integrationSettings(forPlugin: self) else { return }
         guard sprigSettings.envId != "" else { return }
         Sprig.shared.configure(withEnvironment: sprigSettings.envId)
+        isSprigConfigured = true
     }
     
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {

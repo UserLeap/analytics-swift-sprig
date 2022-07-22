@@ -44,7 +44,9 @@ public class SprigDestination: DestinationPlugin {
     
     public func track(event: TrackEvent) -> TrackEvent? {
         recordAnonymousId(from:event)
-        Sprig.shared.track(eventName: event.event) { surveyState in
+        Sprig.shared.track(eventName: event.event,
+                           userId: event.userId,
+                           partnerAnonymousId: event.anonymousId) { surveyState in
             guard surveyState == .ready else { return }
             if let vc = UIApplication.shared.topViewController() {
                 Sprig.shared.presentSurvey(from: vc)

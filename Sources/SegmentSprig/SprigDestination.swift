@@ -26,13 +26,10 @@ public class SprigDestination: DestinationPlugin {
     public init() {}
         
     public func update(settings: Settings, type: UpdateType) {
-        // if sprig has been configured do not configure it again
-        guard isSprigConfigured == false  else { return }
         // Grab the settings from segment
         guard let sprigSettings: SprigSettings = settings.integrationSettings(forPlugin: self) else { return }
         guard sprigSettings.envId != "" else { return }
         Sprig.shared.configure(withEnvironment: sprigSettings.envId)
-        isSprigConfigured = true
     }
     
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {
@@ -47,7 +44,9 @@ public class SprigDestination: DestinationPlugin {
     
     public func track(event: TrackEvent) -> TrackEvent? {
         recordAnonymousId(from:event)
-        Sprig.shared.track(eventName: event.event) { surveyState in
+        Sprig.shared.track(eventName: event.event,
+                           userId: event.userId,
+                           partnerAnonymousId: event.anonymousId) { surveyState in
             guard surveyState == .ready else { return }
             if let vc = UIApplication.shared.topViewController() {
                 Sprig.shared.presentSurvey(from: vc)

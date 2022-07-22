@@ -36,7 +36,7 @@ public class SprigDestination: DestinationPlugin {
         guard let userId = event.userId else { return event }
         recordAnonymousId(from:event)
         Sprig.shared.setUserIdentifier(userId)
-        if let attributes = event.traits?.dictionaryValue as? [String: Any] {
+        if let attributes = event.traits?.dictionaryValue as? [String: Any?] {
             recordTopLevel(attributes: attributes)
         }
         return event
@@ -73,8 +73,11 @@ public class SprigDestination: DestinationPlugin {
         }
     }
     
-    private func recordTopLevel(attributes: [String: Any]) {
-        var stringAttributes = attributes.compactMapValues { String(describing: $0) }
+    private func recordTopLevel(attributes: [String: Any?]) {
+        var stringAttributes:[String: String] = attributes.compactMapValues({ value in
+            guard let value = value else { return nil }
+            return String(describing: value)
+        })
         if let email = stringAttributes["email"] {
             stringAttributes["!email"] = email
             stringAttributes.removeValue(forKey: "email")

@@ -18,20 +18,14 @@ struct ContentView: View {
                     Text("Track")
                 }).padding(6)
                 Button(action: {
-                    Analytics.main.screen(title: "Screen appeared")
+                    Analytics.main.track(name: "Signed Out")
                 }, label: {
-                    Text("Screen")
+                    Text("Signed Out")
                 }).padding(6)
             }.padding(8)
             HStack {
                 Button(action: {
-                    Analytics.main.group(groupId: "12345-Group")
-                    Analytics.main.log(message: "Started group")
-                }, label: {
-                    Text("Group")
-                }).padding(6)
-                Button(action: {
-                    Analytics.main.identify(userId: "X-1234567890")
+                    Analytics.main.identify(userId: "X-1234567890", traits: ["abc": 1])
                 }, label: {
                     Text("Identify")
                 }).padding(6)

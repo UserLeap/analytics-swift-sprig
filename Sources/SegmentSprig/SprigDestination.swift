@@ -22,6 +22,7 @@ public class SprigDestination: DestinationPlugin {
     
     private var sprigSettings: SprigSettings?
     private var isSprigConfigured: Bool = false
+    private let kSignOutEvent = "Signed Out"
     
     public init() {}
         
@@ -39,12 +40,16 @@ public class SprigDestination: DestinationPlugin {
             Sprig.shared.setUserIdentifier(userId)
             return event
         }
-        Sprig.shared.setVisitorAttributes(getTopLevel(attributes), userId, event.anonymousId)
+        Sprig.shared.setVisitorAttributes(getTopLevel(attributes: attributes), userId: userId, partnerAnonymousId: event.anonymousId)
 
         return event
     }
     
     public func track(event: TrackEvent) -> TrackEvent? {
+        guard event.event != kSignOutEvent else {
+            Sprig.shared.logout()
+            return event
+        }
         Sprig.shared.track(eventName: event.event,
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId) { surveyState in

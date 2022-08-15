@@ -34,16 +34,17 @@ public class SprigDestination: DestinationPlugin {
     
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {
         guard let userId = event.userId else { return event }
-        recordAnonymousId(from:event)
-        Sprig.shared.setUserIdentifier(userId)
-        if let attributes = event.traits?.dictionaryValue as? [String: Any?] {
-            recordTopLevel(attributes: attributes)
+        guard let attributes = event.traits?.dictionaryValue as? [String: Any?] else {
+            recordAnonymousId(from:event)
+            Sprig.shared.setUserIdentifier(userId)
+            return event
         }
+        Sprig.shared.setVisitorAttributes(getTopLevel(attributes), userId, event.anonymousId)
+
         return event
     }
     
     public func track(event: TrackEvent) -> TrackEvent? {
-        recordAnonymousId(from:event)
         Sprig.shared.track(eventName: event.event,
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId) { surveyState in
@@ -73,7 +74,7 @@ public class SprigDestination: DestinationPlugin {
         }
     }
     
-    private func recordTopLevel(attributes: [String: Any?]) {
+    private func getTopLevel(attributes: [String: Any?]) -> [String: String] {
         var stringAttributes:[String: String] = attributes.compactMapValues({ value in
             guard let value = value else { return nil }
             return String(describing: value)
@@ -82,7 +83,7 @@ public class SprigDestination: DestinationPlugin {
             stringAttributes["!email"] = email
             stringAttributes.removeValue(forKey: "email")
         }
-        Sprig.shared.setVisitorAttributes(stringAttributes)
+        return stringAttributes
     }
 }
 

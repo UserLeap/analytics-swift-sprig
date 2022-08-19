@@ -35,11 +35,7 @@ public class SprigDestination: DestinationPlugin {
     
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {
         guard let userId = event.userId else { return event }
-        guard let attributes = event.traits?.dictionaryValue as? [String: Any?] else {
-            recordAnonymousId(from:event)
-            Sprig.shared.setUserIdentifier(userId)
-            return event
-        }
+        let attributes: [String: Any?] = event.traits?.dictionaryValue as? [String: Any?] ?? [:]
         Sprig.shared.setVisitorAttributes(getTopLevel(attributes: attributes), userId: userId, partnerAnonymousId: event.anonymousId)
 
         return event

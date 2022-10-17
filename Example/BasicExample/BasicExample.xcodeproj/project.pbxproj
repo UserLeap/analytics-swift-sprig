@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F1ECAE128FDE177006A2830 /* SegmentSprig in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1ECAE028FDE177006A2830 /* SegmentSprig */; };
 		46EDC6F627C6B8D100B870D7 /* BasicExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC6F527C6B8D100B870D7 /* BasicExampleApp.swift */; };
 		46EDC6F827C6B8D100B870D7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC6F727C6B8D100B870D7 /* ContentView.swift */; };
 		46EDC6FA27C6B8D200B870D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EDC6F927C6B8D200B870D7 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F1ECAE128FDE177006A2830 /* SegmentSprig in Frameworks */,
 				46EDC72127C6B92C00B870D7 /* Segment in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +149,7 @@
 			name = BasicExample;
 			packageProductDependencies = (
 				46EDC72027C6B92C00B870D7 /* Segment */,
+				2F1ECAE028FDE177006A2830 /* SegmentSprig */,
 			);
 			productName = BasicExample;
 			productReference = 46EDC6F227C6B8D100B870D7 /* BasicExample.app */;
@@ -222,6 +225,7 @@
 			mainGroup = 46EDC6E927C6B8D100B870D7;
 			packageReferences = (
 				46EDC71F27C6B92C00B870D7 /* XCRemoteSwiftPackageReference "analytics-swift" */,
+				2F1ECADF28FDE177006A2830 /* XCRemoteSwiftPackageReference "analytics-swift-sprig" */,
 			);
 			productRefGroup = 46EDC6F327C6B8D100B870D7 /* Products */;
 			projectDirPath = "";
@@ -589,6 +593,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2F1ECADF28FDE177006A2830 /* XCRemoteSwiftPackageReference "analytics-swift-sprig" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/UserLeap/analytics-swift-sprig";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		46EDC71F27C6B92C00B870D7 /* XCRemoteSwiftPackageReference "analytics-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/segmentio/analytics-swift";
@@ -600,6 +612,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2F1ECAE028FDE177006A2830 /* SegmentSprig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F1ECADF28FDE177006A2830 /* XCRemoteSwiftPackageReference "analytics-swift-sprig" */;
+			productName = SegmentSprig;
+		};
 		46EDC72027C6B92C00B870D7 /* Segment */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 46EDC71F27C6B92C00B870D7 /* XCRemoteSwiftPackageReference "analytics-swift" */;

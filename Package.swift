@@ -27,7 +27,7 @@ let package = Package(
         .package(
             name: "UserLeapKit",
             url: "https://github.com/UserLeap/userleap-ios-sdk-releases/",
-            from: "4.8.5"
+            from: "4.9.0"
         )
     ],
     targets: [

@@ -45,9 +45,11 @@ public class SprigDestination: DestinationPlugin {
             Sprig.shared.logout()
             return event
         }
+        let properties: [String: Any?] = event.properties?.dictionaryValue as? [String: Any?] ?? [:]
         Sprig.shared.track(eventName: event.event,
                            userId: event.userId,
-                           partnerAnonymousId: event.anonymousId) { surveyState in
+                           partnerAnonymousId: event.anonymousId,
+                           properties: properties) { surveyState in
             guard surveyState == .ready else { return }
             if let vc = UIApplication.shared.topViewController() {
                 Sprig.shared.presentSurvey(from: vc)

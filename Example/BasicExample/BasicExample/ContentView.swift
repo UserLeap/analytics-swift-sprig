@@ -13,7 +13,7 @@ struct ContentView: View {
         VStack {
             HStack {
                 Button(action: {
-                    Analytics.main.track(name: "Track")
+                    Analytics.main.track(name: "Track", properties: ["age": 3, "item": "cookies"])
                 }, label: {
                     Text("Track")
                 }).padding(6)

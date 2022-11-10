@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -27,7 +27,7 @@ let package = Package(
         .package(
             name: "UserLeapKit",
             url: "https://github.com/UserLeap/userleap-ios-sdk-releases/",
-            from: "4.11.0"
+            from: "4.11.1-alpha"
         )
     ],
     targets: [

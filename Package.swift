@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -20,14 +20,12 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(
-            name: "Segment",
             url: "https://github.com/segmentio/analytics-swift.git",
             from: "1.1.2"
         ),
         .package(
-            name: "UserLeapKit",
-            url: "https://github.com/UserLeap/userleap-ios-sdk-releases/",
-            from: "4.11.1-alpha"
+            url: "https://github.com/UserLeap/userleap-ios-sdk-releases.git",
+            exact: Version(4, 11, 1, prereleaseIdentifiers: ["alpha"])
         )
     ],
     targets: [
@@ -35,8 +33,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SegmentSprig",
-            dependencies: ["Segment", "UserLeapKit"]),
-        
+            dependencies: [
+                .product(name: "Segment", package: "analytics-swift"),
+                .product(name: "UserLeapKit", package: "userleap-ios-sdk-releases")
+            ]
+        ),
         // TESTS ARE HANDLED VIA THE EXAMPLE APP.
     ]
 )

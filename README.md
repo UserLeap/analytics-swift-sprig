@@ -18,16 +18,40 @@ You'll then have the option to pin to a version, or specific branch, as well as 
 
 ### via Package.swift
 
-Open your Package.swift file and add the following do your the `dependencies` section:
+Open your Package.swift file and add the following to the `dependencies` section:
 
 ```
-.package(
-            name: "Segment",
+dependencies: [
+    // ... other dependencies
+    .package(
             url: "https://github.com/UserLeap/analytics-swift-sprig.git",
-            from: "1.1.3"
+            from: "1.2.1"
         ),
+]
 ```
 
+If you need to depend on a pre-released version of the SDK due to xcode compatibility issues, you should be on at least xcode 13.4 and specify the exact version.
+```
+dependencies: [
+    // ... other dependencies
+    .package(
+            url: "https://github.com/UserLeap/analytics-swift-sprig.git",
+            exact: Version(1, 2, 1, prereleaseIdentifiers: ["alpha"]) // the version number are in sequence: major, minor, patch, prereleaseIdentifier without '-'.
+        ),
+]
+```
+
+Then specify the names of the package
+```
+targets: [
+    .target( 
+        name: "YourPackageName",
+        dependencies: [
+            .product(name: "SegmentSprig", package: "analytics-swift-sprig"),
+        ]
+    )
+]
+```
 
 *Note the Sprig library itself will be installed as an additional dependency.*
 

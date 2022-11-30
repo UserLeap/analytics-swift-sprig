@@ -15,6 +15,9 @@
 		46EDC71127C6B8D200B870D7 /* BasicExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC71027C6B8D200B870D7 /* BasicExampleUITests.swift */; };
 		46EDC71327C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */; };
 		46EDC72127C6B92C00B870D7 /* Segment in Frameworks */ = {isa = PBXBuildFile; productRef = 46EDC72027C6B92C00B870D7 /* Segment */; };
+		DAAA1A36293815AA003D26A9 /* SprigDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA1A34293815AA003D26A9 /* SprigDestination.swift */; };
+		DAAA1A37293815AA003D26A9 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA1A35293815AA003D26A9 /* Version.swift */; };
+		DAAA1A3A293815DA003D26A9 /* UserLeapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DAAA1A39293815DA003D26A9 /* UserLeapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		46EDC70C27C6B8D200B870D7 /* BasicExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EDC71027C6B8D200B870D7 /* BasicExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITests.swift; sourceTree = "<group>"; };
 		46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DAAA1A3229381578003D26A9 /* SegmentSprig */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SegmentSprig; path = ../../Sources/SegmentSprig; sourceTree = "<group>"; };
+		DAAA1A34293815AA003D26A9 /* SprigDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SprigDestination.swift; path = ../../Sources/SegmentSprig/SprigDestination.swift; sourceTree = "<group>"; };
+		DAAA1A35293815AA003D26A9 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Version.swift; path = ../../Sources/SegmentSprig/Version.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAAA1A3A293815DA003D26A9 /* UserLeapKit in Frameworks */,
 				46EDC72127C6B92C00B870D7 /* Segment in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +83,9 @@
 		46EDC6E927C6B8D100B870D7 = {
 			isa = PBXGroup;
 			children = (
+				DAAA1A34293815AA003D26A9 /* SprigDestination.swift */,
+				DAAA1A35293815AA003D26A9 /* Version.swift */,
+				DAAA1A3229381578003D26A9 /* SegmentSprig */,
 				46EDC6F427C6B8D100B870D7 /* BasicExample */,
 				46EDC70527C6B8D200B870D7 /* BasicExampleTests */,
 				46EDC70F27C6B8D200B870D7 /* BasicExampleUITests */,
@@ -147,6 +157,7 @@
 			name = BasicExample;
 			packageProductDependencies = (
 				46EDC72027C6B92C00B870D7 /* Segment */,
+				DAAA1A39293815DA003D26A9 /* UserLeapKit */,
 			);
 			productName = BasicExample;
 			productReference = 46EDC6F227C6B8D100B870D7 /* BasicExample.app */;
@@ -222,6 +233,7 @@
 			mainGroup = 46EDC6E927C6B8D100B870D7;
 			packageReferences = (
 				46EDC71F27C6B92C00B870D7 /* XCRemoteSwiftPackageReference "analytics-swift" */,
+				DAAA1A38293815DA003D26A9 /* XCRemoteSwiftPackageReference "userleap-ios-sdk-releases" */,
 			);
 			productRefGroup = 46EDC6F327C6B8D100B870D7 /* Products */;
 			projectDirPath = "";
@@ -265,6 +277,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAAA1A36293815AA003D26A9 /* SprigDestination.swift in Sources */,
+				DAAA1A37293815AA003D26A9 /* Version.swift in Sources */,
 				46EDC6F827C6B8D100B870D7 /* ContentView.swift in Sources */,
 				46EDC6F627C6B8D100B870D7 /* BasicExampleApp.swift in Sources */,
 			);
@@ -597,6 +611,14 @@
 				kind = branch;
 			};
 		};
+		DAAA1A38293815DA003D26A9 /* XCRemoteSwiftPackageReference "userleap-ios-sdk-releases" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/UserLeap/userleap-ios-sdk-releases";
+			requirement = {
+				kind = exactVersion;
+				version = 4.11.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -604,6 +626,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 46EDC71F27C6B92C00B870D7 /* XCRemoteSwiftPackageReference "analytics-swift" */;
 			productName = Segment;
+		};
+		DAAA1A39293815DA003D26A9 /* UserLeapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAAA1A38293815DA003D26A9 /* XCRemoteSwiftPackageReference "userleap-ios-sdk-releases" */;
+			productName = UserLeapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

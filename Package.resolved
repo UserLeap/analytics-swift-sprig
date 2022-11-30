@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "analytics-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/analytics-swift.git",
+      "state" : {
+        "revision" : "939a04164cd4db7ca666dd1e09663edc2d34c4f3",
+        "version" : "1.3.3"
+      }
+    },
+    {
+      "identity" : "sovran-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/segmentio/Sovran-Swift.git",
+      "state" : {
+        "revision" : "944c17d7c46bd95fc37f09136cabd172be5b413b",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "userleap-ios-sdk-releases",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/UserLeap/userleap-ios-sdk-releases.git",
+      "state" : {
+        "revision" : "58eb35ae917cac78cd25646aae31f3ac314c723e",
+        "version" : "4.11.1"
+      }
+    }
+  ],
+  "version" : 2
+}

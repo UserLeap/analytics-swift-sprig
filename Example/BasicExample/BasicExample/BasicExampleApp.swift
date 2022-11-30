@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Segment
-import SegmentSprig
 
 @main
 struct BasicExampleApp: App {

@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/analytics-swift.git",
       "state" : {
-        "revision" : "939a04164cd4db7ca666dd1e09663edc2d34c4f3",
-        "version" : "1.3.3"
+        "revision" : "af7f1d2fe6e48b1760538739f13f44ba71c1a61c",
+        "version" : "1.3.4"
       }
     },
     {
@@ -21,10 +21,10 @@
     {
       "identity" : "userleap-ios-sdk-releases",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/UserLeap/userleap-ios-sdk-releases.git",
+      "location" : "https://github.com/UserLeap/userleap-ios-sdk-releases/",
       "state" : {
-        "revision" : "58eb35ae917cac78cd25646aae31f3ac314c723e",
-        "version" : "4.11.1"
+        "revision" : "bff1d1a49ed2fc854d98c894ceba910cd02b8e3e",
+        "version" : "4.12.1"
       }
     }
   ],

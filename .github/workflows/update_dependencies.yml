@@ -2,7 +2,7 @@ name: Update Dependencies
 
 on: 
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/10 * * * *'
 
 jobs:
   spm-dep-check:

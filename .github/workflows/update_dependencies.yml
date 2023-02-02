@@ -19,11 +19,12 @@ jobs:
       if: steps.spm-dep-check.outputs.outdatedDependencies  == 'true'
       uses: peter-evans/create-pull-request@v3
       with:
+        token: ${{ secrets.GITHUB_AUTOMATION_TOKEN_WRITE_ACCESS }}
         commit-message: 'chore: update package dependencies'
         branch: updatePackageDepedencies
         delete-branch: true
         title: 'chore: update package dependencies'
         body: ${{ steps.spm-dep-check.outputs.releaseNotes }}
-        team-reviewers: UserLeap/sdk-new-initiatives
-        reviewers: UserLeap/sdk-new-initiatives
+        team-reviewers: sdk-new-initiatives
+        reviewers: sdk-new-initiatives
         labels: 'dependencies'

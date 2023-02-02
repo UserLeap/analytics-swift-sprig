@@ -5,7 +5,24 @@ on:
     - cron: '*/30 * * * *'
 
 jobs:
-  dependencies:
-    uses: MarcoEidinger/swift-package-dependencies-check/.github/workflows/reusableWorkflow.yml@v2
-    with:
-      commit-message: 'chore: update package dependencies'
+  spm-dep-check:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Check Swift package dependencies
+      id: spm-dep-check
+      uses: MarcoEidinger/swift-package-dependencies-check@2.3.2
+      with:
+         isMutating: true
+         failWhenOutdated: false
+    - name: Create Pull Request
+      if: steps.spm-dep-check.outputs.outdatedDependencies  == 'true'
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: 'chore: update package dependencies'
+        branch: updatePackageDepedencies
+        delete-branch: true
+        title: 'chore: update package dependencies'
+        body: ${{ steps.spm-dep-check.outputs.releaseNotes }}
+        team-reviewers: 'UserLeap/sdk-new-initiatives'
+        labels: 'dependencies'

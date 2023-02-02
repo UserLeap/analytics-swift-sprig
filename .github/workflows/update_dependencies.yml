@@ -24,5 +24,6 @@ jobs:
         delete-branch: true
         title: 'chore: update package dependencies'
         body: ${{ steps.spm-dep-check.outputs.releaseNotes }}
-        team-reviewers: sdk-new-initiatives
+        team-reviewers: UserLeap/sdk-new-initiatives
+        reviewers: UserLeap/sdk-new-initiatives
         labels: 'dependencies'

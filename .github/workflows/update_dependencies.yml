@@ -2,7 +2,7 @@ name: Update Dependencies
 
 on: 
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   spm-dep-check:
@@ -20,7 +20,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GH_TOKEN }}
-        commit-message: 'chore: update package dependencies'
+        commit-message: 'Updating dependencies. Remember to bump the version in Sources/SegmentSprig/Version.swift in order to create a release'
         branch: updatePackageDepedencies
         delete-branch: true
         title: 'chore: update package dependencies'

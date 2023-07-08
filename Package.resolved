@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/analytics-swift.git",
       "state" : {
-        "revision" : "79fb17a5d4abf8f80e6a0935e57c7df7b670a6c0",
-        "version" : "1.4.1"
+        "revision" : "c8fd5fdf59299f00b3e4303a1b12a6d88893bf56",
+        "version" : "1.4.7"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/segmentio/Sovran-Swift.git",
       "state" : {
-        "revision" : "944c17d7c46bd95fc37f09136cabd172be5b413b",
-        "version" : "1.0.3"
+        "revision" : "64f3b5150c282a34af4578188dce2fd597e600e3",
+        "version" : "1.1.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/UserLeap/userleap-ios-sdk-releases/",
       "state" : {
-        "revision" : "09fb19deddc00c4c8bd070e283a2a7d30d22279a",
-        "version" : "4.14.0"
+        "revision" : "15d5767a88ae2b1a8e2f449adf083f6ccee0cb0d",
+        "version" : "4.17.0"
       }
     }
   ],

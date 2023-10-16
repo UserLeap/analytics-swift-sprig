@@ -33,7 +33,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SegmentSprig",
-            dependencies: ["Segment", "UserLeapKit"]),
+            dependencies: [.product(name: "Segment", package: "analytics-swift"), .product(name: "UserLeapKit", package: "userleap-ios-sdk-releases")]),
         
         // TESTS ARE HANDLED VIA THE EXAMPLE APP.
     ]

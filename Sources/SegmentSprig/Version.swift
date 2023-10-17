@@ -1,1 +1,1 @@
-internal let __destination_version = "1.2.3"
+internal let __destination_version = "1.2.4"

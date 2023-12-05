@@ -58,6 +58,20 @@ public class SprigDestination: DestinationPlugin {
         return event
     }
     
+    public func screen(event: ScreenEvent) -> ScreenEvent? {
+        let properties: [String: Any?] = event.properties?.dictionaryValue as? [String: Any?] ?? [:]
+        Sprig.shared.track(eventName: event.name!,
+                           userId: event.userId,
+                           partnerAnonymousId: event.anonymousId,
+                           properties: properties) { surveyState in
+            guard surveyState == .ready else { return }
+            if let vc = UIApplication.shared.topViewController() {
+                Sprig.shared.presentSurvey(from: vc)
+            }
+        }
+        return event
+    }
+    
     // switch to a new user id
     public func alias(event: AliasEvent) -> AliasEvent? {
         guard let userId = event.userId else { return event }
@@ -133,6 +147,7 @@ extension UIApplication {
         return topViewController
     }
 }
+
 private struct SprigSettings: Codable {
     let envId: String
 }

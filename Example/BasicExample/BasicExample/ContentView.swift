@@ -18,6 +18,11 @@ struct ContentView: View {
                     Text("Track")
                 }).padding(6)
                 Button(action: {
+                    Analytics.main.screen(title: "iOS Segment Screen", properties: ["segmentActionsiOS": true, "deviceType": "iOS"])
+                }, label: {
+                    Text("Screen")
+                }).padding(6)
+                Button(action: {
                     Analytics.main.track(name: "Signed Out")
                 }, label: {
                     Text("Signed Out")

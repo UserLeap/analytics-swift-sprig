@@ -15,10 +15,20 @@ struct ContentView: View {
                 Button(action: {
                     Analytics.main.track(name: "Track", properties: ["age": 3, "item": "cookies"])
                 }, label: {
+                    Text("Track with Props")
+                }).padding(6)
+                Button(action: {
+                    Analytics.main.track(name: "Track")
+                }, label: {
                     Text("Track")
                 }).padding(6)
                 Button(action: {
                     Analytics.main.screen(title: "iOS Segment Screen", properties: ["segmentActionsiOS": true, "deviceType": "iOS"])
+                }, label: {
+                    Text("Screen with props")
+                }).padding(6)
+                Button(action: {
+                    Analytics.main.screen(title: "iOS Segment Screen")
                 }, label: {
                     Text("Screen")
                 }).padding(6)

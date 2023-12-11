@@ -59,8 +59,9 @@ public class SprigDestination: DestinationPlugin {
     }
     
     public func screen(event: ScreenEvent) -> ScreenEvent? {
+        guard let eventName = event.name else {return}
         let properties: [String: Any?] = event.properties?.dictionaryValue as? [String: Any?] ?? [:]
-        Sprig.shared.track(eventName: event.name!,
+        Sprig.shared.track(eventName: event.name,
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,
                            properties: properties) { surveyState in

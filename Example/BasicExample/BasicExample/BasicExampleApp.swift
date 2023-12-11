@@ -19,7 +19,7 @@ struct BasicExampleApp: App {
 
 extension Analytics {
     static var main: Analytics {
-        let analytics = Analytics(configuration: Configuration(writeKey: "")
+        let analytics = Analytics(configuration: Configuration(writeKey: "<SEGMENT_WRITE_KEY>")
                     .flushAt(3)
                     .trackApplicationLifecycleEvents(true))
         analytics.add(plugin: SprigDestination())

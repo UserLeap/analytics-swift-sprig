@@ -30,7 +30,13 @@ public class SprigDestination: DestinationPlugin {
         // Grab the settings from segment
         guard let sprigSettings: SprigSettings = settings.integrationSettings(forPlugin: self) else { return }
         guard sprigSettings.envId != "" else { return }
-        Sprig.shared.configure(withEnvironment: sprigSettings.envId, configuration: ["x-ul-installation-method": "ios-segment"])
+
+        var configuration: [String: Any] = [
+            "x-ul-installation-method": "ios-segment",
+            "x-ul-package-version": SprigDestination.version()
+        ]
+
+        Sprig.shared.configure(withEnvironment: sprigSettings.envId, configuration: configuration)
     }
     
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {

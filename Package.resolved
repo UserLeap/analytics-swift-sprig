@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/UserLeap/userleap-ios-sdk-releases/",
       "state" : {
-        "revision" : "d76ba0d3024eeb7cb360db3b692d18d3958ee519",
-        "version" : "4.21.2"
+        "revision" : "25145e5cde7d31c4adcc1b0216ecd3a4c74e93d5",
+        "version" : "4.20.2"
       }
     }
   ],

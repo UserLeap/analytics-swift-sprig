@@ -8,8 +8,15 @@
 import SwiftUI
 import Segment
 
+var analytics: Analytics? = nil
+
 @main
 struct BasicExampleApp: App {
+    
+    init() {
+        setupSegment()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -17,12 +24,12 @@ struct BasicExampleApp: App {
     }
 }
 
-extension Analytics {
-    static var main: Analytics {
-        let analytics = Analytics(configuration: Configuration(writeKey: "<SEGMENT_WRITE_KEY>")
-                    .flushAt(3)
-                    .trackApplicationLifecycleEvents(true))
-        analytics.add(plugin: SprigDestination())
-        return analytics
+private extension BasicExampleApp {
+    func setupSegment() {
+        let configuration = Configuration(writeKey: "EZqQCxT9TJd4GGdNwL5x9cKIBMBsLe3S")
+            .flushInterval(10)
+
+        analytics = Analytics.init(configuration: configuration)
+        analytics?.add(plugin: SprigDestination())
     }
 }

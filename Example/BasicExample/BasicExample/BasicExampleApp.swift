@@ -26,7 +26,7 @@ struct BasicExampleApp: App {
 
 private extension BasicExampleApp {
     func setupSegment() {
-        let configuration = Configuration(writeKey: "EZqQCxT9TJd4GGdNwL5x9cKIBMBsLe3S")
+        let configuration = Configuration(writeKey: "<SEGMENT_WRITE_KEY>")
             .flushInterval(10)
 
         analytics = Analytics.init(configuration: configuration)

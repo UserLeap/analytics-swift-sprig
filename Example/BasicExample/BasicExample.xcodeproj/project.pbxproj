@@ -15,6 +15,7 @@
 		46EDC71127C6B8D200B870D7 /* BasicExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC71027C6B8D200B870D7 /* BasicExampleUITests.swift */; };
 		46EDC71327C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */; };
 		46EDC72127C6B92C00B870D7 /* Segment in Frameworks */ = {isa = PBXBuildFile; productRef = 46EDC72027C6B92C00B870D7 /* Segment */; };
+		C588A5F42BEF4820000F3C69 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C588A5F32BEF4820000F3C69 /* Config.plist */; };
 		DAAA1A36293815AA003D26A9 /* SprigDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA1A34293815AA003D26A9 /* SprigDestination.swift */; };
 		DAAA1A37293815AA003D26A9 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA1A35293815AA003D26A9 /* Version.swift */; };
 		DAAA1A3A293815DA003D26A9 /* UserLeapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DAAA1A39293815DA003D26A9 /* UserLeapKit */; };
@@ -48,6 +49,7 @@
 		46EDC70C27C6B8D200B870D7 /* BasicExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EDC71027C6B8D200B870D7 /* BasicExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITests.swift; sourceTree = "<group>"; };
 		46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C588A5F32BEF4820000F3C69 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		DAAA1A3229381578003D26A9 /* SegmentSprig */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SegmentSprig; path = ../../Sources/SegmentSprig; sourceTree = "<group>"; };
 		DAAA1A34293815AA003D26A9 /* SprigDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SprigDestination.swift; path = ../../Sources/SegmentSprig/SprigDestination.swift; sourceTree = "<group>"; };
 		DAAA1A35293815AA003D26A9 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Version.swift; path = ../../Sources/SegmentSprig/Version.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				46EDC6F727C6B8D100B870D7 /* ContentView.swift */,
 				46EDC6F927C6B8D200B870D7 /* Assets.xcassets */,
 				46EDC6FB27C6B8D200B870D7 /* Preview Content */,
+				C588A5F32BEF4820000F3C69 /* Config.plist */,
 			);
 			path = BasicExample;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46EDC6FD27C6B8D200B870D7 /* Preview Assets.xcassets in Resources */,
+				C588A5F42BEF4820000F3C69 /* Config.plist in Resources */,
 				46EDC6FA27C6B8D200B870D7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,7 +620,7 @@
 			repositoryURL = "https://github.com/UserLeap/userleap-ios-sdk-releases";
 			requirement = {
 				kind = exactVersion;
-				version = 4.20.2;
+				version = 4.21.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

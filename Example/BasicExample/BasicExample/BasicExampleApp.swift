@@ -29,7 +29,7 @@ private extension BasicExampleApp {
         var config: [String: Any]?
         if let configPlist = Bundle.main.url(forResource: "Config", withExtension: "plist") {
             do {
-                let configPlist = try Data(contentsOf: infoPlistPath)
+               let configPlist = try Data(contentsOf: configPlist)
                 if let dict = try PropertyListSerialization.propertyList(from: configPlist, options: [], format: nil) as? [String: Any] {
                     config = dict
                 }

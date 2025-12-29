@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "SegmentSprig",
     platforms: [
-        .iOS("13.0"),
+        .iOS("16.0"),
         .tvOS("11.0"),
         .watchOS("7.1")
     ],
@@ -25,7 +25,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/UserLeap/userleap-ios-sdk-releases/",
-            exact: "4.25.1"
+            exact: "4.25.2"
         )
     ],
     targets: [

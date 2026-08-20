@@ -83,4 +83,4 @@ Download [Basic Example](https://github.com/UserLeap/analytics-swift-sprig/tree/
 
 ## Support
 
-Please use Github issues, Pull Requests, or feel free to reach out to our [support team](https://segment.com/help/).
+For issues, please contact Sprig’s Customer Success team at support@sprig.com

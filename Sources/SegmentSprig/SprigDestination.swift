@@ -143,7 +143,7 @@ extension UIApplication {
     /// controllers, as the survey is presented full screen so presenting from the container works the same as from its visible child.
     func topViewController() -> UIViewController? {
         guard var topViewController = mainWindow()?.rootViewController else { return nil }
-        // stop before a view controller that is being dismissed, as presenting on it would fail or be torn down with it
+        // Stop before a view controller that is being dismissed, as presenting on it would fail or be torn down with it.
         while let presented = topViewController.presentedViewController, !presented.isBeingDismissed {
             topViewController = presented
         }
@@ -153,7 +153,7 @@ extension UIApplication {
     /// Returns the app's main window, ignoring hidden and overlay (alert, HUD, toast) windows.
     private func mainWindow() -> UIWindow? {
         let scenes = connectedScenes.compactMap { $0 as? UIWindowScene }
-        // prefer foreground active scenes, then foreground inactive (e.g. SwiftUI launch, system alerts), then any other scene
+        // Prefer foreground active scenes, then foreground inactive (e.g. SwiftUI launch, system alerts), then any other scene.
         let orderedScenes = scenes.filter { $0.activationState == .foregroundActive }
             + scenes.filter { $0.activationState == .foregroundInactive }
             + scenes.filter { $0.activationState != .foregroundActive && $0.activationState != .foregroundInactive }
@@ -162,12 +162,12 @@ extension UIApplication {
             if let key = windowScene.keyWindow, !key.isHidden, key.windowLevel == .normal {
                 return key
             }
-            // the window may not be key yet (e.g. during a SwiftUI app's first render pass)
+            // The window may not be key yet (e.g. during a SwiftUI app's first render pass).
             if let window = windowScene.windows.first(where: { !$0.isHidden && $0.windowLevel == .normal }) {
                 return window
             }
         }
-        // last resort: legacy app delegate window
+        // Last resort: legacy app delegate window
         return delegate?.window ?? nil
     }
 }

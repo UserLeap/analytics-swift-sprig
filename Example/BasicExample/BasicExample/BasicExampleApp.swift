@@ -1,10 +1,3 @@
-//
-//  BasicExampleApp.swift
-//  BasicExample
-//
-//  Created by Brandon Sneed on 2/23/22.
-//
-
 import SwiftUI
 import Segment
 

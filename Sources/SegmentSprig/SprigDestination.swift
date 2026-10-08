@@ -58,12 +58,7 @@ public class SprigDestination: DestinationPlugin {
                            properties: properties) { surveyState in
             print(surveyState.rawValue)
             guard surveyState == .ready else { return }
-            if let vc = UIApplication.shared.topViewController() {
-                Sprig.shared.presentSurvey(from: vc)
-            }
-            else {
-                Sprig.shared.dismissActiveSurvey()
-            }
+            SprigDestination.presentSurveyFromTopViewController()
         }
         return event
     }
@@ -76,11 +71,7 @@ public class SprigDestination: DestinationPlugin {
                            partnerAnonymousId: event.anonymousId,
                            properties: properties) { surveyState in
             guard surveyState == .ready else { return }
-            if let vc = UIApplication.shared.topViewController() {
-                Sprig.shared.presentSurvey(from: vc)
-            } else {
-                Sprig.shared.dismissActiveSurvey()
-            }
+            SprigDestination.presentSurveyFromTopViewController()
         }
         return event
     }
@@ -97,6 +88,27 @@ public class SprigDestination: DestinationPlugin {
         Sprig.shared.logout()
     }
     
+    /// Presents the survey from the top view controller.
+    /// If the top view controller's presented view controller is being dismissed (e.g. a sheet animating away), waits for the
+    /// dismissal to finish and looks up the top view controller again. Looking up again handles both a completed dismissal (present from
+    /// the presenter) and a cancelled interactive dismissal (the sheet stays, so present from the sheet).
+    private static func presentSurveyFromTopViewController() {
+        guard let vc = UIApplication.shared.topViewController() else {
+            Sprig.shared.dismissActiveSurvey()
+            return
+        }
+        // Without a transition coordinator (e.g. a non-animated dismissal) fall through and present from the top view controller.
+        if let dismissingVC = vc.presentedViewController,
+           dismissingVC.isBeingDismissed,
+           let transitionCoordinator = dismissingVC.transitionCoordinator {
+            transitionCoordinator.animate(alongsideTransition: nil) { _ in
+                presentSurveyFromTopViewController()
+            }
+            return
+        }
+        Sprig.shared.presentSurvey(from: vc)
+    }
+
     private func recordAnonymousId(from event: RawEvent) {
         if let anonymousId = event.anonymousId {
             Sprig.shared.setPartnerAnonymousId(anonymousId)
@@ -145,7 +157,8 @@ extension UIApplication {
         let ITERATION_MAX = 200
         while iteration != ITERATION_MAX {
             iteration += 1
-            if let presented = topViewController?.presentedViewController {
+            // stop before a view controller that is being dismissed, as presenting on it would fail or be torn down with it
+            if let presented = topViewController?.presentedViewController, !presented.isBeingDismissed {
                 topViewController = presented
             } else if let navController = topViewController as? UINavigationController {
                 topViewController = navController.topViewController

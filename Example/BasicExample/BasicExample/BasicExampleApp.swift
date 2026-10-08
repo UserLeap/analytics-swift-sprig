@@ -1,5 +1,6 @@
 import SwiftUI
 import Segment
+import SegmentSprig
 
 var analytics: Analytics? = nil
 

@@ -93,6 +93,10 @@ public class SprigDestination: DestinationPlugin {
     /// dismissal to finish and looks up the top view controller again. Looking up again handles both a completed dismissal (present from
     /// the presenter) and a cancelled interactive dismissal (the sheet stays, so present from the sheet).
     private static func presentSurveyFromTopViewController() {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { presentSurveyFromTopViewController() }
+            return
+        }
         guard let vc = UIApplication.shared.topViewController() else {
             Sprig.shared.dismissActiveSurvey()
             return
@@ -135,42 +139,37 @@ extension SprigDestination: VersionedPlugin {
 }
 
 extension UIApplication {
-    // based on this implementation https://stackoverflow.com/a/66573132/3701208
+    /// Returns the view controller to present the survey from.
+    /// Only follows the presentation chain (presentedViewController); it intentionally doesn't look inside navigation / tab bar
+    /// controllers, as the survey is presented full screen so presenting from the container works the same as from its visible child.
     func topViewController() -> UIViewController? {
-        var topViewController: UIViewController? = nil
-        // find the root view controller
-        if #available(iOS 13, *) {
-            for scene in connectedScenes {
-                if let windowScene = scene as? UIWindowScene {
-                    for window in windowScene.windows {
-                        if window.isKeyWindow {
-                            topViewController = window.rootViewController
-                        }
-                    }
-                }
-            }
-        } else {
-            topViewController = keyWindow?.rootViewController
+        guard var topViewController = mainWindow()?.rootViewController else { return nil }
+        // stop before a view controller that is being dismissed, as presenting on it would fail or be torn down with it
+        while let presented = topViewController.presentedViewController, !presented.isBeingDismissed {
+            topViewController = presented
         }
-        // traverse the root view controller's stack to find the top view controller
-        var iteration = 0
-        let ITERATION_MAX = 200
-        while iteration != ITERATION_MAX {
-            iteration += 1
-            // stop before a view controller that is being dismissed, as presenting on it would fail or be torn down with it
-            if let presented = topViewController?.presentedViewController, !presented.isBeingDismissed {
-                topViewController = presented
-            } else if let navController = topViewController as? UINavigationController {
-                topViewController = navController.topViewController
-            } else if let tabBarController = topViewController as? UITabBarController {
-                topViewController = tabBarController.selectedViewController
-            } else {
-                // we have a regular view controller
-                break
-            }
-        }
-        guard iteration != ITERATION_MAX else { return nil }
         return topViewController
+    }
+
+    /// Returns the app's main window, ignoring hidden and overlay (alert, HUD, toast) windows.
+    private func mainWindow() -> UIWindow? {
+        let scenes = connectedScenes.compactMap { $0 as? UIWindowScene }
+        // prefer foreground active scenes, then foreground inactive (e.g. SwiftUI launch, system alerts), then any other scene
+        let orderedScenes = scenes.filter { $0.activationState == .foregroundActive }
+            + scenes.filter { $0.activationState == .foregroundInactive }
+            + scenes.filter { $0.activationState != .foregroundActive && $0.activationState != .foregroundInactive }
+
+        for windowScene in orderedScenes {
+            if let key = windowScene.keyWindow, !key.isHidden, key.windowLevel == .normal {
+                return key
+            }
+            // the window may not be key yet (e.g. during a SwiftUI app's first render pass)
+            if let window = windowScene.windows.first(where: { !$0.isHidden && $0.windowLevel == .normal }) {
+                return window
+            }
+        }
+        // last resort: legacy app delegate window
+        return delegate?.window ?? nil
     }
 }
 

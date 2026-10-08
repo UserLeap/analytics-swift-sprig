@@ -2,59 +2,57 @@ import SwiftUI
 import Segment
 
 struct ContentView: View {
+    @State private var showSheet = false
     var body: some View {
         NavigationView {
             VStack {
                 
-                Button(action: {
+                Button("Track with Props") {
                     analytics!.track(name: "Track", properties: ["age": 3, "item": "cookies"])
-                }, label: {
-                    Text("Track with Props")
-                })
+                }
                 .buttonStyle(.borderedProminent)
                 
-                Button(action: {
+                Button("Track") {
                     analytics?.track(name: "Track")
-                }, label: {
-                    Text("Track")
-                })
+                }
                 .buttonStyle(.borderedProminent)
                 
-                Button(action: {
+                Button("Screen with props") {
                     analytics?.screen(title: "iOS Segment Screen", properties: ["segmentActionsiOS": true, "deviceType": "iOS"])
-                }, label: {
-                    Text("Screen with props")
-                })
+                }
                 .buttonStyle(.borderedProminent)
                 
-                Button(action: {
+                Button("Screen") {
                     analytics?.screen(title: "iOS Segment Screen")
-                }, label: {
-                    Text("Screen")
-                })
+                }
                 .buttonStyle(.borderedProminent)
                 
-                Button(action: {
+                Button("Signed Out") {
                     analytics?.track(name: "Signed Out")
-                }, label: {
-                    Text("Signed Out")
-                })
+                }
                 .buttonStyle(.borderedProminent)
                 
-                Button(action: {
+                Button("Identify") {
                     analytics?.identify(userId: "X-1234567890", traits: ["abc": 1])
-                }, label: {
-                    Text("Identify")
-                })
+                }
                 .buttonStyle(.borderedProminent)
                 
                 NavigationLink(destination: SecondView()) {
                     Text("Go To Second View")
                 }
                 .buttonStyle(.borderedProminent)
+                
+                Button("Show sheet") {
+                    showSheet = true
+                }
+                .buttonStyle(.borderedProminent)
             }
-        }.onAppear {
+        }
+        .onAppear {
             analytics?.track(name: "random")
+        }
+        .sheet(isPresented: $showSheet) {
+            SheetView()
         }
     }
 }
@@ -68,6 +66,14 @@ struct SecondView: View {
                 }
             }
         }.onAppear {
+            analytics?.track(name: "Track")
+        }
+    }
+}
+
+struct SheetView: View {
+    var body: some View {
+        Button("Track"){
             analytics?.track(name: "Track")
         }
     }

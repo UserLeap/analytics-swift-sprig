@@ -46,10 +46,7 @@ struct ContentView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
-        }
-        .onAppear {
-            analytics?.track(name: "random")
-        }
+        }}
         .sheet(isPresented: $showSheet) {
             SheetView()
         }

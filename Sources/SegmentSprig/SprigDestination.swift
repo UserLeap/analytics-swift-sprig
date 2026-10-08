@@ -55,8 +55,9 @@ public class SprigDestination: DestinationPlugin {
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,
                            properties: properties) { surveyState in
-            guard surveyState == .ready else { return }
+            guard surveyState == .ready || surveyState == .previousSurveyReady else { return }
             SprigDestination.presentSurveyFromTopViewController()
+            
         }
         return event
     }
@@ -68,7 +69,7 @@ public class SprigDestination: DestinationPlugin {
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,
                            properties: properties) { surveyState in
-            guard surveyState == .ready else { return }
+            guard surveyState == .ready || surveyState == .previousSurveyReady else { return }
             SprigDestination.presentSurveyFromTopViewController()
         }
         return event

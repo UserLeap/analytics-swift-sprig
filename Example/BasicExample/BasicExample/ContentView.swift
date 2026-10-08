@@ -4,9 +4,8 @@ import Segment
 struct ContentView: View {
     @State private var showSheet = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                
                 Button("Track with Props") {
                     analytics!.track(name: "Track", properties: ["age": 3, "item": "cookies"])
                 }
@@ -59,11 +58,9 @@ struct ContentView: View {
 
 struct SecondView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                HStack {
-                    Text("Second View")
-                }
+                Text("Second View")
             }
         }.onAppear {
             analytics?.track(name: "Track")
@@ -76,6 +73,7 @@ struct SheetView: View {
         Button("Track"){
             analytics?.track(name: "Track")
         }
+        .buttonStyle(.borderedProminent)
     }
 }
 

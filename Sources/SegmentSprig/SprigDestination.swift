@@ -56,7 +56,6 @@ public class SprigDestination: DestinationPlugin {
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,
                            properties: properties) { surveyState in
-            print(surveyState.rawValue)
             guard surveyState == .ready else { return }
             SprigDestination.presentSurveyFromTopViewController()
         }

@@ -69,9 +69,15 @@ struct SecondView: View {
 }
 
 struct SheetView: View {
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         Button("Track"){
             analytics?.track(name: "Track")
+        }
+        .buttonStyle(.borderedProminent)
+        Button("Track and dismiss") {
+            analytics?.track(name: "Track")
+            dismiss()
         }
         .buttonStyle(.borderedProminent)
     }

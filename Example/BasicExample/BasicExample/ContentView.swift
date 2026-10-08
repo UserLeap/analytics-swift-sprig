@@ -37,7 +37,7 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
                 
                 NavigationLink(destination: SecondView()) {
-                    Text("Go To Second View")
+                    Text("Push Second View and track")
                 }
                 .buttonStyle(.borderedProminent)
                 

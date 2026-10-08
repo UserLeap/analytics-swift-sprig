@@ -46,7 +46,7 @@ struct ContentView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
-        }}
+        }
         .sheet(isPresented: $showSheet) {
             SheetView()
         }

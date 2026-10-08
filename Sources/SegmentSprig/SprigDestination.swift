@@ -125,7 +125,6 @@ extension SprigDestination: VersionedPlugin {
 extension UIApplication {
     // based on this implementation https://stackoverflow.com/a/66573132/3701208
     func topViewController() -> UIViewController? {
-        return nil
         var topViewController: UIViewController? = nil
         // find the root view controller
         if #available(iOS 13, *) {

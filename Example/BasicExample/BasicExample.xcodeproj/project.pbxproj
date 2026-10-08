@@ -14,8 +14,10 @@
 		46EDC70727C6B8D200B870D7 /* BasicExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC70627C6B8D200B870D7 /* BasicExampleTests.swift */; };
 		46EDC71127C6B8D200B870D7 /* BasicExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC71027C6B8D200B870D7 /* BasicExampleUITests.swift */; };
 		46EDC71327C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */; };
-		DAAA1A3C293815DA003D26A9 /* SegmentSprig in Frameworks */ = {isa = PBXBuildFile; productRef = DAAA1A3B293815DA003D26A9 /* SegmentSprig */; };
 		C588A5F42BEF4820000F3C69 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = C588A5F32BEF4820000F3C69 /* Config.plist */; };
+		D62FDFFE3078445A00BF7614 /* Tab1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62FDFFD3078445700BF7614 /* Tab1View.swift */; };
+		D62FE0003078446100BF7614 /* Tab2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62FDFFF3078445D00BF7614 /* Tab2View.swift */; };
+		DAAA1A3C293815DA003D26A9 /* SegmentSprig in Frameworks */ = {isa = PBXBuildFile; productRef = DAAA1A3B293815DA003D26A9 /* SegmentSprig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		46EDC71027C6B8D200B870D7 /* BasicExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITests.swift; sourceTree = "<group>"; };
 		46EDC71227C6B8D200B870D7 /* BasicExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C588A5F32BEF4820000F3C69 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		D62FDFFD3078445700BF7614 /* Tab1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab1View.swift; sourceTree = "<group>"; };
+		D62FDFFF3078445D00BF7614 /* Tab2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab2View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 		46EDC6F427C6B8D100B870D7 /* BasicExample */ = {
 			isa = PBXGroup;
 			children = (
+				D62FDFFF3078445D00BF7614 /* Tab2View.swift */,
+				D62FDFFD3078445700BF7614 /* Tab1View.swift */,
 				46EDC6F527C6B8D100B870D7 /* BasicExampleApp.swift */,
 				46EDC6F727C6B8D100B870D7 /* ContentView.swift */,
 				46EDC6F927C6B8D200B870D7 /* Assets.xcassets */,
@@ -271,6 +277,8 @@
 			files = (
 				46EDC6F827C6B8D100B870D7 /* ContentView.swift in Sources */,
 				46EDC6F627C6B8D100B870D7 /* BasicExampleApp.swift in Sources */,
+				D62FE0003078446100BF7614 /* Tab2View.swift in Sources */,
+				D62FDFFE3078445A00BF7614 /* Tab1View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +446,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,7 +475,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

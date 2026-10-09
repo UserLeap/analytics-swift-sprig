@@ -1,11 +1,3 @@
-//
-//  SprigDestination.swift
-//  SprigDestination
-//
-//  Created by Gong Chen on 7/18/2021.
-//
-
-
 import Foundation
 import Segment
 import UserLeapKit
@@ -31,7 +23,7 @@ public class SprigDestination: DestinationPlugin {
         guard let sprigSettings: SprigSettings = settings.integrationSettings(forPlugin: self) else { return }
         guard sprigSettings.envId != "" else { return }
 
-        var configuration: [String: Any] = [
+        let configuration: [String: Any] = [
             "x-ul-installation-method": "ios-segment",
             "x-ul-package-version": SprigDestination.version()
         ]
@@ -50,7 +42,7 @@ public class SprigDestination: DestinationPlugin {
             Sprig.shared.logout()
             return event
         }
-        let properties: [String: Any?] = event.properties?.dictionaryValue as? [String: Any?] ?? [:]
+        let properties: [String: Any] = event.properties?.dictionaryValue as? [String: Any] ?? [:]
         Sprig.shared.track(eventName: event.event,
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,
@@ -64,7 +56,7 @@ public class SprigDestination: DestinationPlugin {
     
     public func screen(event: ScreenEvent) -> ScreenEvent? {
         guard let eventName = event.name else {return event}
-        let properties: [String: Any?] = event.properties?.dictionaryValue as? [String: Any?] ?? [:]
+        let properties: [String: Any] = event.properties?.dictionaryValue as? [String: Any] ?? [:]
         Sprig.shared.track(eventName: eventName,
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,

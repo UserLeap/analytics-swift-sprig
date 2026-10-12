@@ -1,11 +1,3 @@
-//
-//  SprigDestination.swift
-//  SprigDestination
-//
-//  Created by Gong Chen on 7/18/2021.
-//
-
-
 import Foundation
 import Segment
 import UserLeapKit
@@ -31,7 +23,7 @@ public class SprigDestination: DestinationPlugin {
         guard let sprigSettings: SprigSettings = settings.integrationSettings(forPlugin: self) else { return }
         guard sprigSettings.envId != "" else { return }
 
-        var configuration: [String: Any] = [
+        let configuration: [String: Any] = [
             "x-ul-installation-method": "ios-segment",
             "x-ul-package-version": SprigDestination.version()
         ]
@@ -42,7 +34,6 @@ public class SprigDestination: DestinationPlugin {
     public func identify(event: IdentifyEvent) -> IdentifyEvent? {
         let attributes: [String: Any?] = event.traits?.dictionaryValue as? [String: Any?] ?? [:]
         Sprig.shared.setVisitorAttributes(getTopLevel(attributes: attributes), userId: event.userId, partnerAnonymousId: event.anonymousId)
-
         return event
     }
     
@@ -51,30 +42,27 @@ public class SprigDestination: DestinationPlugin {
             Sprig.shared.logout()
             return event
         }
-        let properties: [String: Any?] = event.properties?.dictionaryValue as? [String: Any?] ?? [:]
+        let properties: [String: Any] = event.properties?.dictionaryValue as? [String: Any] ?? [:]
         Sprig.shared.track(eventName: event.event,
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,
                            properties: properties) { surveyState in
-            guard surveyState == .ready else { return }
-            if let vc = UIApplication.shared.topViewController() {
-                Sprig.shared.presentSurvey(from: vc)
-            }
+            guard surveyState == .ready || surveyState == .previousSurveyReady else { return }
+            SprigDestination.presentSurveyFromTopViewController()
+            
         }
         return event
     }
     
     public func screen(event: ScreenEvent) -> ScreenEvent? {
         guard let eventName = event.name else {return event}
-        let properties: [String: Any?] = event.properties?.dictionaryValue as? [String: Any?] ?? [:]
+        let properties: [String: Any] = event.properties?.dictionaryValue as? [String: Any] ?? [:]
         Sprig.shared.track(eventName: eventName,
                            userId: event.userId,
                            partnerAnonymousId: event.anonymousId,
                            properties: properties) { surveyState in
-            guard surveyState == .ready else { return }
-            if let vc = UIApplication.shared.topViewController() {
-                Sprig.shared.presentSurvey(from: vc)
-            }
+            guard surveyState == .ready || surveyState == .previousSurveyReady else { return }
+            SprigDestination.presentSurveyFromTopViewController()
         }
         return event
     }
@@ -91,6 +79,31 @@ public class SprigDestination: DestinationPlugin {
         Sprig.shared.logout()
     }
     
+    /// Presents the survey from the top view controller.
+    /// If the top view controller's presented view controller is being dismissed (e.g. a sheet animating away), waits for the
+    /// dismissal to finish and looks up the top view controller again. Looking up again handles both a completed dismissal (present from
+    /// the presenter) and a cancelled interactive dismissal (the sheet stays, so present from the sheet).
+    private static func presentSurveyFromTopViewController() {
+        guard Thread.isMainThread else {
+            DispatchQueue.main.async { presentSurveyFromTopViewController() }
+            return
+        }
+        guard let vc = UIApplication.shared.topViewController() else {
+            Sprig.shared.dismissActiveSurvey()
+            return
+        }
+        // Without a transition coordinator (e.g. a non-animated dismissal) fall through and present from the top view controller.
+        if let dismissingVC = vc.presentedViewController,
+           dismissingVC.isBeingDismissed,
+           let transitionCoordinator = dismissingVC.transitionCoordinator {
+            transitionCoordinator.animate(alongsideTransition: nil) { _ in
+                presentSurveyFromTopViewController()
+            }
+            return
+        }
+        Sprig.shared.presentSurvey(from: vc)
+    }
+
     private func recordAnonymousId(from event: RawEvent) {
         if let anonymousId = event.anonymousId {
             Sprig.shared.setPartnerAnonymousId(anonymousId)
@@ -117,41 +130,37 @@ extension SprigDestination: VersionedPlugin {
 }
 
 extension UIApplication {
-    // based on this implementation https://stackoverflow.com/a/66573132/3701208
+    /// Returns the view controller to present the survey from.
+    /// Only follows the presentation chain (presentedViewController); it intentionally doesn't look inside navigation / tab bar
+    /// controllers, as the survey is presented full screen so presenting from the container works the same as from its visible child.
     func topViewController() -> UIViewController? {
-        var topViewController: UIViewController? = nil
-        // find the root view controller
-        if #available(iOS 13, *) {
-            for scene in connectedScenes {
-                if let windowScene = scene as? UIWindowScene {
-                    for window in windowScene.windows {
-                        if window.isKeyWindow {
-                            topViewController = window.rootViewController
-                        }
-                    }
-                }
-            }
-        } else {
-            topViewController = keyWindow?.rootViewController
+        guard var topViewController = mainWindow()?.rootViewController else { return nil }
+        // Stop before a view controller that is being dismissed, as presenting on it would fail or be torn down with it.
+        while let presented = topViewController.presentedViewController, !presented.isBeingDismissed {
+            topViewController = presented
         }
-        // traverse the root view controller's stack to find the top view controller
-        var iteration = 0
-        let ITERATION_MAX = 200
-        while iteration != ITERATION_MAX {
-            iteration += 1
-            if let presented = topViewController?.presentedViewController {
-                topViewController = presented
-            } else if let navController = topViewController as? UINavigationController {
-                topViewController = navController.topViewController
-            } else if let tabBarController = topViewController as? UITabBarController {
-                topViewController = tabBarController.selectedViewController
-            } else {
-                // we have a regular view controller
-                break
-            }
-        }
-        guard iteration != ITERATION_MAX else { return nil }
         return topViewController
+    }
+
+    /// Returns the app's main window, ignoring hidden and overlay (alert, HUD, toast) windows.
+    private func mainWindow() -> UIWindow? {
+        let scenes = connectedScenes.compactMap { $0 as? UIWindowScene }
+        // Prefer foreground active scenes, then foreground inactive (e.g. SwiftUI launch, system alerts), then any other scene.
+        let orderedScenes = scenes.filter { $0.activationState == .foregroundActive }
+            + scenes.filter { $0.activationState == .foregroundInactive }
+            + scenes.filter { $0.activationState != .foregroundActive && $0.activationState != .foregroundInactive }
+
+        for windowScene in orderedScenes {
+            if let key = windowScene.keyWindow, !key.isHidden, key.windowLevel == .normal {
+                return key
+            }
+            // The window may not be key yet (e.g. during a SwiftUI app's first render pass).
+            if let window = windowScene.windows.first(where: { !$0.isHidden && $0.windowLevel == .normal }) {
+                return window
+            }
+        }
+        // Last resort: legacy app delegate window
+        return delegate?.window ?? nil
     }
 }
 
